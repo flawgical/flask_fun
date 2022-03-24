@@ -40,3 +40,7 @@ app.register_blueprint(core)
 #linking the 404 and 403 error pages into the app 
 from puppyBlog.error_pages.handlers import error_pages
 app.register_blueprint(error_pages)
+
+#linking users views Blueprint
+from puppyBlog.users.views import users
+app.register_blueprint(users)
