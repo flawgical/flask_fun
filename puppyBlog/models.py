@@ -14,7 +14,7 @@ from datetime import datetime
 def load_user(user_id):
     return User.query.get(user_id)
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)

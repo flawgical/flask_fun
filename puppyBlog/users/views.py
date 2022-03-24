@@ -28,20 +28,25 @@ def register():
 # login
 @users.route('/login', methods=['GET', 'POST'])
 def login():
+
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user.check_password(form.password.data) and user is not None:
-            login_user(user)
-            flash('Logged in!')
-        # grab the info of what the user was trying to do 
-            next = request.args.get('next')
-            if next==None or not next[0]=='/':
-                next = url_for('core.index')
-            
-            return redirect(next)
-    return render_template('login.html', form=form)
 
+        user = User.query.filter_by(email=form.email.data).first()
+
+        if user.check_password(form.password.data) and user is not None:
+
+            login_user(user)
+            flash('Log in Success!')
+
+            next = request.args.get('next')
+
+            if next ==None or not next[0]=='/':
+                next = url_for('core.index')
+
+            return redirect(next)
+
+    return render_template('login.html',form=form)
 
 # logout
 @users.route('/logout')
@@ -78,8 +83,11 @@ def account():
 @users.route('/<username>')
 def user_posts(username):
     # we need to grab the blog posts associated with that user and the page 
-    page = request.args.get('page', 1, type=int) #this will help us cycle through users posts using pages - we won't need to have 150 posts in one go - we can cycle through the pages - will be referencing it later on
-    user = User.query.filter_by(username=username).first_or_404()  # instead of getting a major error we can pass an error here 
-    blog_posts = BlogPost.query.filter_by(author=user).order_by(BlogPost.data.desc()).paginate(page=page, per_page=5) # foreign key relationship was author for each users' post AND we are requesting pages 5 per page for pagination 
+    page = request.args.get('page', 1, type=int) 
+    #this will help us cycle through users posts using pages - we won't need to have 150 posts in one go - we can cycle through the pages - will be referencing it later on
+    user = User.query.filter_by(username=username).first_or_404()  
+    # instead of getting a major error we can pass an error here 
+    blog_posts = BlogPost.query.filter_by(author=user).order_by(BlogPost.data.desc()).paginate(page=page, per_page=5) 
+    # foreign key relationship was author for each users' post AND we are requesting pages 5 per page for pagination 
     return render_template('user_blog_posts.html', blog_posts=blog_posts, user=user)
 
