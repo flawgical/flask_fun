@@ -1,5 +1,5 @@
 # puppyBlog/__init__.py 
-
+# import _tkinter
 from cmath import log
 from flask import Flask 
 from flask_sqlalchemy import SQLAlchemy

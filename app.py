@@ -1,4 +1,4 @@
-
+# import _tkinter as tk
 from puppyBlog import app 
 
 if __name__ == '__main__':
