@@ -45,3 +45,8 @@ app.register_blueprint(error_pages)
 #linking users views Blueprint
 from puppyBlog.users.views import users
 app.register_blueprint(users)
+
+
+#linking and registering BLogposts views Blueprint
+from puppyBlog.blogposts.views import blog_posts
+app.register_blueprint(blog_posts)
