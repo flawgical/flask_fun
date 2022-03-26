@@ -4,14 +4,14 @@
         <div class="jumbotron">
             <div align="center">
                 <h1>Welcome to the page for {{user.username}}</h1>
-                <img align="center" src="{{url_for('static', filename='profile_pics/'+user.profile_image)}}">
+                <img width="100" height="150" align="center" src="{{url_for('static', filename='profile_pics/'+user.profile_image)}}">
             </div>
         </div>
-     {% for post in blog_post.items %}
+     {% for post in blog_posts.items %}
     <h2>
         <a href="{{url_for('blog_posts.blog_post', blog_post_id=post.id)}}">{{post.title}}</a>
     </h2>
-    Written By: <a href="{{url_for('users.user_post', username=post.author.username)}}">{{post.author.username}}</a>
+    Written By: <a href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
 
     <p class="text-muted">
         Published On: {{post.date.strftime("%y-%m-%d")}}

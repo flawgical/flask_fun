@@ -1,7 +1,5 @@
 #blogposts/views 
 
-from crypt import methods
-from turtle import title
 from flask import render_template, url_for, flash, request, redirect, Blueprint, abort
 from flask_login import current_user, login_required
 from puppyBlog import db 
@@ -30,7 +28,7 @@ def create_post():
 @blog_posts.route('/<int:blog_post_id>') #make sure this is an integer 
 def blog_post(blog_post_id):
     blog_post = BlogPost.query.get_or_404(blog_post_id) # this blog post id is not a string - we are querying for an int 
-    return render_template('blog_post.html', title=blog_post.title, data=blog_post.data, post=blog_post)
+    return render_template('blog_post.html', title=blog_post.title, date=blog_post.date, post=blog_post)
 
 
 

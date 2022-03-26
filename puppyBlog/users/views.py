@@ -87,7 +87,7 @@ def user_posts(username):
     #this will help us cycle through users posts using pages - we won't need to have 150 posts in one go - we can cycle through the pages - will be referencing it later on
     user = User.query.filter_by(username=username).first_or_404()  
     # instead of getting a major error we can pass an error here 
-    blog_posts = BlogPost.query.filter_by(author=user).order_by(BlogPost.data.desc()).paginate(page=page, per_page=5) 
+    blog_posts = BlogPost.query.filter_by(author=user).order_by(BlogPost.date.desc()).paginate(page=page, per_page=5) 
     # foreign key relationship was author for each users' post AND we are requesting pages 5 per page for pagination 
     return render_template('user_blog_posts.html', blog_posts=blog_posts, user=user)
 
